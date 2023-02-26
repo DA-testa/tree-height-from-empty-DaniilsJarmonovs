@@ -38,6 +38,7 @@ def main():
     # let user input file name to use, don't allow file names with letter a
     # account for github input inprecision
     inp = input()
+    text = ""
     if("i" in inp):
         print("Now input data from keyboard")
         count = int(input())
@@ -56,11 +57,11 @@ def main():
     global l
     global max_height
     l = list(text)
-    for i in range(len(l)):
+    for i in range(count):
         l[i] = elem(l[i], 0)
     max_height = 0
     val = 0
-    for i in range(len(l)):
+    for i in range(count):
         val = l[i]
         #print("Val = ", val)
         compute_height(val, 0, i)
