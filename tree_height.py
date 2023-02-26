@@ -41,11 +41,11 @@ def main():
     text = ""
     count = 0
     if("i" in inp):
-        print("Now input data from keyboard")
+        #print("Now input data from keyboard")
         count = int(input())
         text = input()
     elif("F" in inp):
-        FName = input("Enter the name of the file: ")
+        FName = input()
         if("a" in FName):
             print("Sorry, the name can't contain letter 'a'")
         else:
