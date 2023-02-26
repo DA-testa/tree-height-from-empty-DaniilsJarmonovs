@@ -49,7 +49,7 @@ def main():
         if("a" in FName):
             print("Sorry, the name can't contain letter 'a'")
         else:
-            with open(FName, mode="r") as file:
+            with open("./test/"+FName, mode="r") as file:
                 count = int(file.readline())
                 text = file.readline()
                 
