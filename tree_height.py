@@ -40,7 +40,7 @@ def main():
     inp = input()
     text = ""
     count = 0
-    if("i" in inp):
+    if("I" in inp):
         #print("Now input data from keyboard")
         count = int(input())
         text = input()
