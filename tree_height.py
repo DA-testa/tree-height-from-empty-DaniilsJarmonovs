@@ -39,6 +39,7 @@ def main():
     # account for github input inprecision
     inp = input()
     text = ""
+    count = 0
     if("i" in inp):
         print("Now input data from keyboard")
         count = int(input())
