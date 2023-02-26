@@ -8,21 +8,29 @@ elem = namedtuple("elem", ["value", "depth"])
 #def compute_height(n, parents):
     # Write this function
     #max_height = 0
+
     # Your code here
     #return max_height
 
 def compute_height(val, h, index):
+    #print(val.depth)
     global max_height
     if(val.depth>0):
         if(h+val.depth>max_height):
-            max_height = h+val.depth
+            max_height = h+val.depth-1
+        #print("returned")
         return
     elif(val.value != -1):
+        #print("elifed")
         compute_height(l[val.value], h+1, val.value)
     else:
+        #print("elsed")
         if(h>max_height):
             max_height = h
+        #print("returned")
         return
+    #print("set")
+    #print(l[index])
     l[index] = elem(val.value, h+1)
 
 def main():
@@ -54,12 +62,24 @@ def main():
     val = 0
     for i in range(len(l)):
         val = l[i]
+        #print("Val = ", val)
         compute_height(val, 0, i)
+        #height = compute_height(val, 0)
+        #print(height)
+        #if height>max_height:
+        #    max_height = height
+        #while(val != -1):
+        #    val = text[val]
+        #    height += 1
+        #if height>max_height:
+        #    max_height = height
+    #print("---")
     print(max_height+1)
             
     # input number of elements
     # input values in one variable, separate with space, split these values in an array
     # call the function and output it's result
+    pass
 
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
