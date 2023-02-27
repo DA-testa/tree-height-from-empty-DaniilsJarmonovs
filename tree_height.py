@@ -15,9 +15,11 @@ elem = namedtuple("elem", ["value", "depth"])
 def compute_height(val, h, index):
     #print(val.depth)
     global max_height
+    global d
     if(val.depth>0):
         if(h+val.depth>max_height):
             max_height = h+val.depth-1
+        d = val.depth
         #print("returned")
         return
     elif(val.value != -1):
@@ -31,7 +33,7 @@ def compute_height(val, h, index):
         return
     #print("set")
     #print(l[index])
-    l[index] = elem(val.value, h+1)
+    l[index] = elem(val.value, h+1+d)
 
 def main():
     # implement input form keyboard and from files
@@ -52,11 +54,15 @@ def main():
             with open("./test/"+FName, mode="r") as file:
                 count = int(file.readline())
                 text = file.readline()
-                
+    else:
+        print("Īncorrect input format")
+        return
+    
     text = text.split()
     text = map(int, text)
     global l
     global max_height
+    global d
     l = list(text)
     for i in range(count):
         l[i] = elem(l[i], 0)
@@ -65,7 +71,9 @@ def main():
     for i in range(count):
         val = l[i]
         #print("Val = ", val)
+        d = 0
         compute_height(val, 0, i)
+        ##print(l)
         #height = compute_height(val, 0)
         #print(height)
         #if height>max_height:
@@ -75,7 +83,7 @@ def main():
         #    height += 1
         #if height>max_height:
         #    max_height = height
-    #print("---")
+    
     print(max_height+1)
             
     # input number of elements
