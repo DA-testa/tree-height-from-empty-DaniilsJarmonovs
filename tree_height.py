@@ -21,7 +21,7 @@ def compute_height(val, h, index):
             max_height = h+val.depth-1
         d = val.depth
         #print("returned")
-        return
+        #return
     elif(val.value != -1):
         #print("elifed")
         compute_height(l[val.value], h+1, val.value)
@@ -33,7 +33,8 @@ def compute_height(val, h, index):
         return
     #print("set")
     #print(l[index])
-    l[index] = elem(val.value, h+1+d)
+    if (l[index].depth == 0):
+        l[index] = elem(val.value, h+1+d)
 
 def main():
     # implement input form keyboard and from files
@@ -73,7 +74,7 @@ def main():
         #print("Val = ", val)
         d = 0
         compute_height(val, 0, i)
-        ##print(l)
+        #print(l)
         #height = compute_height(val, 0)
         #print(height)
         #if height>max_height:
