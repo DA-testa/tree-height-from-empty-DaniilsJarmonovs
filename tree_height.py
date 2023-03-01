@@ -3,7 +3,7 @@ import threading
 #import numpy
 from collections import namedtuple
 
-elem = namedtuple("elem", ["value", "depth"])
+elem = namedtuple("elem", ["value", "depth", "visited"])
 
 #def compute_height(n, parents):
     # Write this function
@@ -12,87 +12,55 @@ elem = namedtuple("elem", ["value", "depth"])
     # Your code here
     #return max_height
 
-def compute_height(val, h, index, dep):
-    #print("h = ", h)
-    global max_height
-    global d
-    if(val.depth>0):
-        if(h+val.depth>max_height):
-            max_height = h+val.depth-1
-        d = val.depth
-        #print(d)
-        #print("returned")
-        #return
-    elif(val.value != -1):
-        #print("elifed")
-        compute_height(l[val.value], h+1, val.value, dep-1)
-    else:
-        #print("elsed")
-        if(h>max_height):
-            max_height = h
-        #print("returned")
-        return
-    #print("set")
-    #print(l[index])
-    if (l[index].depth == 0):
-        #l[index] = elem(val.value, h+1+d)
-        l[index] = elem(val.value, (-1)*dep)
-
 def main():
-    # implement input form keyboard and from files
-    # let user input file name to use, don't allow file names with letter a
-    # account for github input inprecision
     inp = input()
     text = ""
     count = 0
     if("I" in inp):
-        #print("Now input data from keyboard")
+        print("Now input data from keyboard")
         count = int(input())
         text = input()
     elif("F" in inp):
-        FName = input()
+        FName = input("Enter the name of the file: ")
         if("a" in FName):
             print("Sorry, the name can't contain letter 'a'")
         else:
-            with open("./test/"+FName, mode="r") as file:
+            with open(FName, mode="r") as file:
                 count = int(file.readline())
                 text = file.readline()
-    else:
-        print("Incorrect input format")
-        return
-    
+                
     text = text.split()
     text = map(int, text)
-    global l
-    global max_height
-    global d
     l = list(text)
-    for i in range(count):
-        l[i] = elem(l[i], 0)
     max_height = 0
-    val = 0
+    for i in range(count):
+        l[i] = elem(l[i], 0, False)
     for i in range(count):
         val = l[i]
-        #print("Val = ", val)
-        d = 0
-        compute_height(val, 0, i, 0)
-        print(l)
-        #height = compute_height(val, 0)
-        #print(height)
-        #if height>max_height:
-        #    max_height = height
-        #while(val != -1):
-        #    val = text[val]
-        #    height += 1
-        #if height>max_height:
-        #    max_height = height
-    
+        if(not val.visited):
+            #print("Checked ", i)
+            tail = [i]
+            height = 1
+            while(val.value != -1):
+                tail.append(val.value)
+                val = l[val.value]
+                height = height + 1
+                if(val.visited):
+                    height = height + val.depth - 1
+                    break
+            #print("Height is", height)
+            if height>max_height:
+                max_height = height
+            #print(tail)
+            n = val.depth
+            for j in range(len(tail)-1, -1, -1):
+                node = tail[j]
+                if l[node].depth<n:
+                    l[node] = elem(l[node].value, n, True)
+                n += 1
+    #print(l)
     print(max_height+1)
-            
-    # input number of elements
-    # input values in one variable, separate with space, split these values in an array
-    # call the function and output it's result
-    pass
+
 
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
