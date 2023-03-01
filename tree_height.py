@@ -37,7 +37,7 @@ def main():
                 val = l[val.value]
                 height = height + 1
                 if(val.visited):
-                    height = height + val.depth - 1
+                    height = height + val.depth
                     break
             if height>max_height:
                 max_height = height
@@ -47,7 +47,7 @@ def main():
                 if l[node].depth<n:
                     l[node] = elem(l[node].value, n, True)
                 n += 1
-    print(max_height+1)
+    print(max_height)
 
 
 # In Python, the default limit on recursion depth is rather low,
