@@ -1,3 +1,5 @@
+#Izstrādāja: Daniils Jarmonovs (221RDC003) - 18. grupa
+
 import sys
 import threading
 #import numpy
